@@ -5,7 +5,7 @@ const base = typeof import.meta !== 'undefined' && import.meta.env && import.met
     : 'http://localhost:5000/api';
 
 const API = axios.create({
-    baseURL: base
+    baseURL: import.meta.env.VITE_API_URL
 });
 
 // attach token automatically if present
