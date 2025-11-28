@@ -2,7 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 // NOTE: We assume your NavBar component is imported as Navbar from the Components folder, 
 // matching the style we enhanced earlier.
-import Navbar from "./Components/Navbar1"; 
+import Navbar from "./Components/Navbar1";
 import { useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
@@ -23,14 +23,17 @@ import ResumePage from "./Pages/ResumePage";
 function CandidateApp() {
   // Use useLocation, but remove the conditional logic for the footer
   // const location = useLocation();
-  
+
   return (
     // CRITICAL: Use flex column structure to ensure the footer sticks to the bottom
-    <div className="min-h-screen flex flex-col"> 
-      
+    <div className="min-h-screen flex flex-col">
+
       {/* Navbar always at the top */}
-      <Navbar /> 
-      
+      <Navbar />
+      <div className="bg-white dark:bg-black text-black dark:text-yellow-300 p-10">
+        🔥 DARK MODE TEST BLOCK
+      </div>
+
       {/* Routes wrapped in <main> with flex-grow to push footer down */}
       <main className="flex-grow">
         <Routes>
@@ -48,9 +51,9 @@ function CandidateApp() {
           <Route path="/resumepage" element={<ResumePage />} />
         </Routes>
       </main>
-      
-       
-      
+
+
+
       <ToastContainer />
     </div>
   );
