@@ -30,9 +30,6 @@ function CandidateApp() {
 
       {/* Navbar always at the top */}
       <Navbar />
-      <div className="p-4 mt-4 bg-white text-black dark:bg-black dark:text-yellow-300 rounded-xl transition-colors duration-300">
-        🔥 DARK MODE TEST BLOCK
-      </div>
 
 
       {/* Routes wrapped in <main> with flex-grow to push footer down */}
