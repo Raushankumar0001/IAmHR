@@ -16,6 +16,8 @@ import {
   FileText,    // Icon for Resume Maker
   Settings    // Icon for Settings
 } from 'lucide-react';
+import ThemeToggle from "../../components/ThemeToggle";
+
 
 import API from "../../api";
 
@@ -57,7 +59,7 @@ export default function Navbar() {
         .then((res) => {
           if (res?.data?.user) setUser(res.data.user);
         })
-        .catch(() => {});
+        .catch(() => { });
     }
   }, []);
 
@@ -102,15 +104,14 @@ export default function Navbar() {
   // Mobile menu link helper
   function MobileLink({ to, label, Icon }) {
     const isActive = location.pathname === to || (to !== '/candidate' && location.pathname.startsWith(to));
-    
+
     return (
       <Link
         to={to}
-        className={`flex items-center gap-3 py-3 px-4 rounded-lg transition duration-150 text-base font-medium ${
-            isActive
-              ? `bg-${UPSTOX_LIGHT_PURPLE_BG} text-${UPSTOX_TEXT_PURPLE} font-semibold`
-              : 'text-gray-700 hover:bg-gray-100'
-        }`}
+        className={`flex items-center gap-3 py-3 px-4 rounded-lg transition duration-150 text-base font-medium ${isActive
+            ? `bg-${UPSTOX_LIGHT_PURPLE_BG} text-${UPSTOX_TEXT_PURPLE} font-semibold`
+            : 'text-gray-700 hover:bg-gray-100'
+          }`}
         onClick={() => setMobileOpen(false)}
       >
         <Icon className="h-5 w-5" />
@@ -125,7 +126,7 @@ export default function Navbar() {
       localStorage.removeItem("token");
       localStorage.removeItem("hr_user");
       localStorage.removeItem("user");
-    } catch (e) {}
+    } catch (e) { }
     window.location.replace("/");
   };
 
@@ -160,6 +161,7 @@ export default function Navbar() {
 
           {/* Right - Actions */}
           <div className="flex items-center space-x-3">
+            <ThemeToggle />
             {/* Notification bell */}
             <div className="relative hidden sm:block" ref={notifRef}>
               <button
@@ -174,11 +176,10 @@ export default function Navbar() {
 
               <div
                 role="menu"
-                className={`origin-top-right absolute right-0 mt-2 w-80 rounded-xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 transform transition-all duration-300 ease-out z-50 ${
-                  notifOpen
+                className={`origin-top-right absolute right-0 mt-2 w-80 rounded-xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 transform transition-all duration-300 ease-out z-50 ${notifOpen
                     ? "opacity-100 scale-100"
                     : "opacity-0 scale-95 pointer-events-none"
-                }`}
+                  }`}
               >
                 <div className="px-4 py-3">
                   <div className="flex items-center justify-between border-b border-gray-100 pb-2 mb-1">
@@ -223,54 +224,53 @@ export default function Navbar() {
                 aria-label="Open user menu"
                 type="button"
               >
-                 <div className={`w-8 h-8 rounded-full bg-${UPSTOX_TEXT_PURPLE} flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}>
-                    {getInitial(user?.name)}
+                <div className={`w-8 h-8 rounded-full bg-${UPSTOX_TEXT_PURPLE} flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}>
+                  {getInitial(user?.name)}
                 </div>
                 {userOpen ? (
-                    <ChevronUp className="h-4 w-4 text-gray-500 flex-shrink-0 hidden sm:block" />
+                  <ChevronUp className="h-4 w-4 text-gray-500 flex-shrink-0 hidden sm:block" />
                 ) : (
-                    <ChevronDown className="h-4 w-4 text-gray-500 flex-shrink-0 hidden sm:block" />
+                  <ChevronDown className="h-4 w-4 text-gray-500 flex-shrink-0 hidden sm:block" />
                 )}
               </button>
 
               <div
                 role="menu"
-                className={`origin-top-right absolute right-0 mt-2 w-56 rounded-xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 transform transition-all duration-300 ease-out z-50 ${
-                  userOpen
+                className={`origin-top-right absolute right-0 mt-2 w-56 rounded-xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 transform transition-all duration-300 ease-out z-50 ${userOpen
                     ? "opacity-100 scale-100"
                     : "opacity-0 scale-95 pointer-events-none"
-                }`}
+                  }`}
               >
                 <div className="p-2">
-                    <div className="px-4 py-2 text-sm text-gray-500 border-b border-gray-100 mb-1">
-                        Signed in as: 
-                        <span className="font-semibold text-gray-700 block truncate">{user?.name || "Guest"}</span>
-                        <span className="text-xs text-gray-400 block truncate">{user?.email || "not-signed-in"}</span>
-                    </div>
-                    
-                    <Link
-                        to="/candidate/dashboard"
-                        className={`flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-${UPSTOX_LIGHT_PURPLE_BG} hover:text-${UPSTOX_TEXT_PURPLE} rounded-lg w-full transition duration-150`}
-                        onClick={() => setUserOpen(false)}
-                    >
-                        <LayoutDashboard className="h-4 w-4" />
-                        Dashboard
-                    </Link>
-                    <Link
-                        to="/candidate/settings"
-                        className={`flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-${UPSTOX_LIGHT_PURPLE_BG} hover:text-${UPSTOX_TEXT_PURPLE} rounded-lg w-full transition duration-150`}
-                        onClick={() => setUserOpen(false)}
-                    >
-                        <Settings className="h-4 w-4" />
-                        Settings
-                    </Link>
-                    <button
-                        onClick={handleSignOut}
-                        className="flex items-center gap-2 px-3 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg w-full transition duration-150 mt-1 border-t border-gray-100"
-                    >
-                        <LogOut className="h-4 w-4" />
-                        Sign out
-                    </button>
+                  <div className="px-4 py-2 text-sm text-gray-500 border-b border-gray-100 mb-1">
+                    Signed in as:
+                    <span className="font-semibold text-gray-700 block truncate">{user?.name || "Guest"}</span>
+                    <span className="text-xs text-gray-400 block truncate">{user?.email || "not-signed-in"}</span>
+                  </div>
+
+                  <Link
+                    to="/candidate/dashboard"
+                    className={`flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-${UPSTOX_LIGHT_PURPLE_BG} hover:text-${UPSTOX_TEXT_PURPLE} rounded-lg w-full transition duration-150`}
+                    onClick={() => setUserOpen(false)}
+                  >
+                    <LayoutDashboard className="h-4 w-4" />
+                    Dashboard
+                  </Link>
+                  <Link
+                    to="/candidate/settings"
+                    className={`flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-${UPSTOX_LIGHT_PURPLE_BG} hover:text-${UPSTOX_TEXT_PURPLE} rounded-lg w-full transition duration-150`}
+                    onClick={() => setUserOpen(false)}
+                  >
+                    <Settings className="h-4 w-4" />
+                    Settings
+                  </Link>
+                  <button
+                    onClick={handleSignOut}
+                    className="flex items-center gap-2 px-3 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg w-full transition duration-150 mt-1 border-t border-gray-100"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Sign out
+                  </button>
                 </div>
               </div>
             </div>
@@ -297,10 +297,14 @@ export default function Navbar() {
         id="mobile-menu"
         className={`${mobileOpen ? "block" : "hidden"} md:hidden`}
       >
+        <div className="flex justify-center py-2">
+          <ThemeToggle />
+        </div>
+
         <div className="px-4 pt-4 pb-6 space-y-2 border-t border-gray-100">
-            {navItems.map(item => (
-                <MobileLink key={item.to} to={item.to} label={item.label} Icon={item.icon} />
-            ))}
+          {navItems.map(item => (
+            <MobileLink key={item.to} to={item.to} label={item.label} Icon={item.icon} />
+          ))}
           <div className="pt-4 border-t border-gray-100">
             <button
               onClick={handleSignOut}
